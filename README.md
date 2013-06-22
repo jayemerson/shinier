@@ -1,7 +1,8 @@
 shinier
 =======
 
-A package extending package shiny and assisting in the creation of Shiny interactive web applications
+A package extending package shiny and assisting in the creation of Shiny
+interactive web applications
 
 ## Features
 
@@ -11,6 +12,7 @@ belong in package shiny and will be maintained for the purpose of extending Shin
 
 ## Installation
 
+I'm just trying to figure out this Github Mac interface.
 
 ## Getting Started
 
