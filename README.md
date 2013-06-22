@@ -5,10 +5,9 @@ A package extending package shiny and assisting in the creation of Shiny interac
 
 ## Features
 
-If you don't know anything about Shiny, you should visit the R Studio folks.  This package
+If you don't know anything about Shiny, you should visit the R Studio folks.  Package shinier
 includes functions that may ultimately be included in package shiny.  Other functions don't
 belong in package shiny and will be maintained for the purpose of extending Shiny functionality.
-
 
 ## Installation
 
