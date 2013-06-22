@@ -12,10 +12,7 @@ belong in package shiny and will be maintained for the purpose of extending Shin
 
 ## Installation
 
-I'm just trying to figure out this Github Mac interface.
-
 ## Getting Started
-
 
 ## License
 
