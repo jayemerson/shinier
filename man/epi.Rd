@@ -1,12 +1,8 @@
 \name{epi}
 \alias{epi}
 \docType{data}
-\title{
-%%   ~~ data name/kind ... ~~
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
-}
+\title{2012 Environmental Performance Index Data}
+\description{2012 Environmental Performance Index Data}
 \usage{data(epi)}
 \format{
   A data frame with 1452 observations on the following 45 variables.
@@ -68,7 +64,7 @@
 %%  ~~ possibly secondary sources and usages ~~
 }
 \examples{
-data(epi)
-## maybe str(epi) ; plot(epi) ...
+  # Examples here
+  data(epi)
 }
 \keyword{datasets}
