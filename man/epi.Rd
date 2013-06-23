@@ -55,13 +55,13 @@
   }
 }
 \details{
-%%  ~~ If necessary, more details than the __description__ above ~~
+Please see \url{http://epi.yale.edu}.
 }
 \source{
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
+Please see \url{http://epi.yale.edu}.
 }
 \references{
-%%  ~~ possibly secondary sources and usages ~~
+Please see publications available at \url{http://epi.yale.edu}.
 }
 \examples{
   # Examples here
