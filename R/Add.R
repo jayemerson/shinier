@@ -12,7 +12,7 @@ headerPanelAdd <- function(title, windowTitle = NULL)
 }
 
 
-SelectInputAdd <- function(inputId, label, choices, selected = NULL,
+selectInputAdd <- function(inputId, label, choices, selected = NULL,
                            multiple = FALSE)
 {
   if (is.null(.GlobalEnv$.shinier)) {
