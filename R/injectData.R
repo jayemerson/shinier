@@ -6,7 +6,7 @@ injectData <- function(x, var)
   se <- .GlobalEnv$.shinier$se
   .GlobalEnv$.shinier$data[[var]] <- x
 
-  startline <- grep("library(shiny)", se, fixed=TRUE)
+  startline <- grep("require(shinier)", se, fixed=TRUE)
   se <- c(se[1:startline],
           paste("load(", deparse(paste(var,".Rdata",sep="")), ")", sep=""),
           se[-c(1:startline)])

@@ -17,8 +17,8 @@ Earth Science Information Network.
 \tabular{ll}{
 Package: \tab shinier\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2013-06-19\cr
+Version: \tab 0.1\cr
+Date: \tab 2013-06-23\cr
 License: \tab GPL-3\cr
 }
 Package overview goes here.

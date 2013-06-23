@@ -15,8 +15,8 @@ shinySkeleton <- function(name = "myshinyapp") {
 
   .GlobalEnv$.shinier <- list(
     name = name,
-    ui = readLines(system.file("ui.R", package="shinier")),
-    se = readLines(system.file("server.R", package="shinier")),
+    ui = readLines(system.file("skeleton/ui.R", package="shinier")),
+    se = readLines(system.file("skeleton/server.R", package="shinier")),
     data = list()
   )
 

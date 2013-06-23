@@ -1,7 +1,7 @@
 Package: shinier
-Version: 1.0
+Version: 0.1
 Title: Making Shiny Application Creation Easier
-Date: 2013-06-19
+Date: 2013-06-23
 Author: Jay Emerson
 Maintainer: Jay Emerson <john.emerson@yale.edu>
 Depends: shiny

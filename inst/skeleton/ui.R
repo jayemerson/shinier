@@ -1,4 +1,4 @@
-library(shiny)
+require(shinier)
 
 shinyUI(
 
