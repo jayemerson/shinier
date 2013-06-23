@@ -1,79 +1,107 @@
-headerPanelAdd <- function(title, windowTitle=NULL) {
-  if (is.null(.GlobalEnv$.shinier)) stop("No skeleton exists; see help(\"shinySkeleton\")")
+headerPanelAdd <- function(title, windowTitle = NULL)
+{
+  if (is.null(.GlobalEnv$.shinier)) {
+    stop("No skeleton exists; see help(\"shinySkeleton\")")
+  }
   ui <- .GlobalEnv$.shinier$ui
-  if (!is.null(windowTitle)) title <- paste(deparse(title), ", ", deparse(windowTitle), sep="")
+  if (!is.null(windowTitle)) title <- paste(deparse(title), ", ",
+                                            deparse(windowTitle), sep="")
   ui <- gsub("\"Application Title\"", title, ui)
   .GlobalEnv$.shinier$ui <- ui
   invisible(ui)
 }
 
+
 SelectInputAdd <- function(inputId, label, choices, selected = NULL,
-                           multiple = FALSE) {
-
-}
-
-# THIS WOULD BE AN ADDITION TO SHINY:
-checkboxGroupArrayInput <- function(inputId, label, choices, selected = NULL, ncol = 3) 
+                           multiple = FALSE)
 {
-    choices <- shiny:::choicesWithNames(choices)
-    checkboxes <- list(HTML("<table>"))
-    thiscol <- 1
-    for (i in seq_along(choices)) {
-        checkboxes[[length(checkboxes)+1]] <- HTML(ifelse(thiscol==1, "<tr><td>", "<td>"))
-        choiceName <- names(choices)[i]
-        inputTag <- tags$input(type = "checkbox", name = inputId, 
-            id = paste(inputId, i, sep = ""), value = choices[[i]])
-        if (choiceName %in% selected) 
-            inputTag$attribs$checked <- "checked"
-        checkbox <- tags$label(class = "checkbox", inputTag, 
-            tags$span(choiceName))
-        checkboxes[[length(checkboxes)+1]] <- checkbox
-        checkboxes[[length(checkboxes)+1]] <- HTML(ifelse(thiscol==ncol, "</td></tr>", "</td>"))
-        thiscol <- ifelse(thiscol==ncol, 1, thiscol+1)
-    }
-    if (thiscol>1) {
-        checkboxes[[length(checkboxes)+1]] <- HTML(rep("<td>&nbsp;</td>", ncol - thiscol + 1))
-        checkboxes[[length(checkboxes)+1]] <- HTML("</tr>")
-    }
-    checkboxes[[length(checkboxes)+1]] <- HTML("</table>")
-    tags$div(id = inputId, class = "control-group shiny-input-checkboxgroup", 
-        shiny:::controlLabel(inputId, label), checkboxes)
-}
+  if (is.null(.GlobalEnv$.shinier)) {
+    stop("No skeleton exists; see help(\"shinySkeleton\")")
+  }
+  ui <- .GlobalEnv$.shinier$ui
 
-checkboxGroupArrayInputAdd <- function(inputId, label, choices, selected = NULL, ncol = 3) {
-
-}
-
-plotOutputAdd <- function(outputId, width = "100%", height = "400px", plotcode=NULL) {
-
-}
-
-# Needs modification, use list of data objects in .shinier
-injectData <- function(x, var) {
-  assign(var, x)
-  .GlobalEnv$.shinierdata <- c(.GlobalEnv$.shinierdata, var)
-  save(list=var, file=paste(var, ".Rdata", sep=""))
+  # If choices is a 2-column object, take care of business nicely
+  # If choices is a vector without names, then add them
+  # Otherwise, assume the user has followed directions on the arguments.
+  # This will add the input as the "last" input of the sidebarPanel.
+  if (length(dim(choices))==2 && dim(choices)[2]==2) {
+    thenames <- choices[,2]
+    choices <- choices[,1]
+    names(choices) <- thenames
+  }
+  if (length(dim(choices))==0 && is.null(names(choices))) names(choices) <- choices
   
-  startline <- grep("library(shiny)", se, fixed=TRUE)
-  se <- c(se[1:startline],
-          paste("load(", deparse(paste(var,".Rdata",sep="")), ")", sep=""),
-          se[-c(1:startline)])
-  se
+  foo <- c(paste("      selectInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
+           paste("        ", paste(deparse(choices), collapse=""), ",", sep=""),
+           paste("        ", deparse(selected), ", ", deparse(multiple), ")", sep=""))
+  
+  startline <- grep("START sidebarPanel", ui)
+  endline <- grep("END sidebarPanel", ui)
+  if (startline+1 < endline) foo <- c(",", foo)
+  ui <- c(ui[1:(endline-1)], foo, ui[endline:length(ui)])
+  .GlobalEnv$.shinier$ui <- ui
+  invisible(ui)
 }
 
-# Probably minor editing to get ui and se from the right place, and more
-# dummy-proofing.
-createApp <- function(appName, overwrite=TRUE) {
-  if (file.exists(appName) && !overwrite) stop("App exists") else {
-    if (!file.exists(appName)) dir.create(appName)
+
+checkboxGroupArrayInputAdd <- function(inputId, label, choices,
+                                       selected = NULL, ncol = 3)
+{
+  if (is.null(.GlobalEnv$.shinier)) {
+    stop("No skeleton exists; see help(\"shinySkeleton\")")
   }
-  writeLines(ui, file.path(appName, "ui.R"))
-  writeLines(se, file.path(appName, "server.R"))
-  if (!is.null(.GlobalEnv$.shinierdata)) {
-    for (i in .GlobalEnv$.shinierdata) {
-      file.rename(paste(i, ".Rdata", sep=""), file.path(appName, paste(i, ".Rdata", sep="")))
-    }
-    .GlobalEnv$.shinierdata <- NULL
+  ui <- .GlobalEnv$.shinier$ui
+
+  # If choices is a 2-column object, take care of business nicely
+  # If choices is a vector without names, then add them
+  # Otherwise, assume the user has followed directions on the arguments.
+  # This will add the input as the "last" input of the sidebarPanel.
+  if (length(dim(choices))==2 && dim(choices)[2]==2) {
+    thenames <- choices[,2]
+    choices <- choices[,1]
+    names(choices) <- thenames
   }
+  if (length(dim(choices))==0 && is.null(names(choices))) names(choices) <- choices
+  
+  foo <- c(paste("      checkboxGroupArrayInput(", deparse(inputId), ", ",
+                 deparse(label), ",", sep=""),
+           paste("        ", paste(deparse(choices), collapse=""), ",", sep=""),
+           paste("        ", deparse(selected), ", ", deparse(ncol), ")", sep=""))
+  
+  startline <- grep("START sidebarPanel", ui)
+  endline <- grep("END sidebarPanel", ui)
+  if (startline+1 < endline) foo <- c(",", foo)
+  ui <- c(ui[1:(endline-1)], foo, ui[endline:length(ui)])
+
+  .GlobalEnv$.shinier$ui <- ui
+  invisible(ui)
+}
+
+plotOutputAdd <- function(outputId, width = "100%", height = "400px", plotcode = NULL)
+{
+  if (is.null(.GlobalEnv$.shinier)) {
+    stop("No skeleton exists; see help(\"shinySkeleton\")")
+  }
+  ui <- .GlobalEnv$.shinier$ui
+  se <- .GlobalEnv$.shinier$se
+
+  if (is.null(plotcode)) stop("You must specify plot code")
+  foo <- paste("      plotOutput(", deparse(outputId), ",", deparse(width),
+               ",", deparse(height), ")", sep="")
+  
+  startline <- grep("START mainPanel", ui)
+  endline <- grep("END mainPanel", ui)
+  if (startline+1 < endline) foo <- c(",", foo)
+  ui <- c(ui[1:(endline-1)], foo, ui[endline:length(ui)])
+  
+  foo <- c(paste("  output$", outputId, " <- renderPlot({", sep=""),
+           paste("    ", plotcode, sep=""),
+           "})")
+  startline <- grep("shinyServer content", se)
+  se <- c(se[1:startline], foo, se[-c(1:startline)])
+      
+  .GlobalEnv$.shinier$ui <- ui
+  .GlobalEnv$.shinier$se <- se
+  invisible(list(ui=ui, se=se))
 }
 
