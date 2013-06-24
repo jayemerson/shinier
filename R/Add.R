@@ -57,10 +57,50 @@ sliderInputAdd <- function(inputId, label, min, max, value, step = NULL,
 
   foo <- c(paste("      sliderInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
            paste("        ", deparse(min), ",", deparse(max), ",", sep=""),
-           paste("        ", deparse(value), ", ", deparse(step), ")", sep=""),
+           paste("        ", deparse(value), ", ", deparse(step), sep=""),
            paste("        ", deparse(round), ", ", deparse(format), ",", sep=""),
            paste("        ", deparse(format), ", ", deparse(locale), ",", sep=""),
-           paste("        ", deparse(ticks), ", ", deparse(animate), sep=""))
+           paste("        ", deparse(ticks), ", ", deparse(animate), ")", sep=""))
+
+  startline <- grep("START sidebarPanel", ui)
+  endline <- grep("END sidebarPanel", ui)
+  if (startline+1 < endline) foo <- c(",", foo)
+  ui <- c(ui[1:(endline-1)], foo, ui[endline:length(ui)])
+
+  .GlobalEnv$.shinier$ui <- ui
+  invisible(ui)
+}
+
+textInputAdd <- function(inputId, label, value = "")
+{
+  if (is.null(.GlobalEnv$.shinier)) {
+    stop("No skeleton exists; see help(\"shinySkeleton\")")
+  }
+  ui <- .GlobalEnv$.shinier$ui
+
+  foo <- c(paste("      textInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
+           paste("        ", deparse(value), ")", sep=""))
+
+  startline <- grep("START sidebarPanel", ui)
+  endline <- grep("END sidebarPanel", ui)
+  if (startline+1 < endline) foo <- c(",", foo)
+  ui <- c(ui[1:(endline-1)], foo, ui[endline:length(ui)])
+
+  .GlobalEnv$.shinier$ui <- ui
+  invisible(ui)
+}
+
+numericInputAdd <- function(inputId, label, value, min = NA, max = NA,
+    step = NA)
+{
+  if (is.null(.GlobalEnv$.shinier)) {
+    stop("No skeleton exists; see help(\"shinySkeleton\")")
+  }
+  ui <- .GlobalEnv$.shinier$ui
+
+  foo <- c(paste("      numericInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
+           paste("        ", deparse(value), ", ", deparse(min), sep=""),
+           paste("        ", deparse(max), ")", sep=""))
 
   startline <- grep("START sidebarPanel", ui)
   endline <- grep("END sidebarPanel", ui)
