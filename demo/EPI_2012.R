@@ -52,7 +52,7 @@ injectData(x, "x")
 
 myplot <- '
   maxyear <- input$yearmax
-  minyear <- min(maxyear, input$yearmin)
+  minyear <- min(maxyear-1, input$yearmin)
   y <- x[x$ISO==input$country, c("Year", input$var1)]
   y <- y[y$Year >= minyear & y$Year <= maxyear,]
   ylab <- input$var1
