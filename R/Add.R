@@ -57,10 +57,10 @@ sliderInputAdd <- function(inputId, label, min, max, value, step = NULL,
 
   foo <- c(paste("      sliderInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
            paste("        ", deparse(min), ",", deparse(max), ",", sep=""),
-           paste("        ", deparse(value), ", ", deparse(step), sep=""),
-           paste("        ", deparse(round), ", ", deparse(format), ",", sep=""),
-           paste("        ", deparse(format), ", ", deparse(locale), ",", sep=""),
-           paste("        ", deparse(ticks), ", ", deparse(animate), ")", sep=""))
+           paste("        ", deparse(value), ", step=", deparse(step), ",", sep=""),
+           paste("        round=", deparse(round), ", format=", deparse(format), ",", sep=""),
+           paste("        locale=", deparse(locale), ",", sep=""),
+           paste("        ticks=", deparse(ticks), ", animate=", deparse(animate), ")", sep=""))
 
   startline <- grep("START sidebarPanel", ui)
   endline <- grep("END sidebarPanel", ui)
@@ -99,7 +99,7 @@ numericInputAdd <- function(inputId, label, value, min = NA, max = NA,
   ui <- .GlobalEnv$.shinier$ui
 
   foo <- c(paste("      numericInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
-           paste("        ", deparse(value), ", ", deparse(min), sep=""),
+           paste("        ", deparse(value), ", ", deparse(min), ",", sep=""),
            paste("        ", deparse(max), ")", sep=""))
 
   startline <- grep("START sidebarPanel", ui)
