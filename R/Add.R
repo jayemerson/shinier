@@ -4,9 +4,11 @@ headerPanelAdd <- function(title, windowTitle = NULL)
     stop("No skeleton exists; see help(\"shinySkeleton\")")
   }
   ui <- .GlobalEnv$.shinier$ui
+
   if (!is.null(windowTitle)) title <- paste(deparse(title), ", ",
                                             deparse(windowTitle), sep="")
   ui <- gsub("\"Application Title\"", title, ui)
+
   .GlobalEnv$.shinier$ui <- ui
   invisible(ui)
 }
@@ -39,10 +41,35 @@ selectInputAdd <- function(inputId, label, choices, selected = NULL,
   endline <- grep("END sidebarPanel", ui)
   if (startline+1 < endline) foo <- c(",", foo)
   ui <- c(ui[1:(endline-1)], foo, ui[endline:length(ui)])
+
   .GlobalEnv$.shinier$ui <- ui
   invisible(ui)
 }
 
+sliderInputAdd <- function(inputId, label, min, max, value, step = NULL,
+         round = FALSE, format = "#,##0.#####", locale = "us",
+         ticks = TRUE, animate = FALSE)
+{
+  if (is.null(.GlobalEnv$.shinier)) {
+    stop("No skeleton exists; see help(\"shinySkeleton\")")
+  }
+  ui <- .GlobalEnv$.shinier$ui
+
+  foo <- c(paste("      sliderInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
+           paste("        ", deparse(min), ",", deparse(max), ",", sep=""),
+           paste("        ", deparse(value), ", ", deparse(step), ")", sep=""),
+           paste("        ", deparse(round), ", ", deparse(format), ",", sep=""),
+           paste("        ", deparse(format), ", ", deparse(locale), ",", sep=""),
+           paste("        ", deparse(ticks), ", ", deparse(animate), sep=""))
+
+  startline <- grep("START sidebarPanel", ui)
+  endline <- grep("END sidebarPanel", ui)
+  if (startline+1 < endline) foo <- c(",", foo)
+  ui <- c(ui[1:(endline-1)], foo, ui[endline:length(ui)])
+
+  .GlobalEnv$.shinier$ui <- ui
+  invisible(ui)
+}
 
 checkboxGroupArrayInputAdd <- function(inputId, label, choices,
                                        selected = NULL, ncol = 3)
