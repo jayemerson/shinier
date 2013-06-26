@@ -56,7 +56,7 @@ sliderInputAdd <- function(inputId, label, min, max, value, step = NULL,
   ui <- .GlobalEnv$.shinier$ui
 
   foo <- c(paste("      sliderInput(", deparse(inputId), ", ", deparse(label), ",", sep=""),
-           paste("        ", deparse(min), ",", deparse(max), ",", sep=""),
+           paste("        ", deparse(min), ", ", deparse(max), ",", sep=""),
            paste("        ", deparse(value), ", step=", deparse(step), ",", sep=""),
            paste("        round=", deparse(round), ", format=", deparse(format), ",", sep=""),
            paste("        locale=", deparse(locale), ",", sep=""),
@@ -163,7 +163,7 @@ plotOutputAdd <- function(outputId, width = "100%", height = "400px", plotcode =
   
   foo <- c(paste("  output$", outputId, " <- renderPlot({", sep=""),
            paste("    ", plotcode, sep=""),
-           "})")
+           "  })")
   startline <- grep("shinyServer content", se)
   se <- c(se[1:startline], foo, se[-c(1:startline)])
       
