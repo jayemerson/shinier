@@ -2,7 +2,9 @@ shinier
 =======
 
 A package extending package shiny (in very minor ways) and
-assisting in the creation of Shiny interactive web applications
+assisting in the creation of Shiny interactive web applications.
+As I learn more about Shiny, I may end-of-life this.  But for now,
+here we go.
 
 ## Features
 
