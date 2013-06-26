@@ -18,7 +18,7 @@ for the purpose of extending Shiny functionality.
 
 ## Installation
 
-The package is in development and may be highly unstable.  I'll try to keep
+The package is in development and may be unstable.  I'll try to keep
 the master branch in working order on Github, so have a look at my
 [Github repository](http://github.com/jayemerson/shinier).  Once it has
 some functionality that someone might actually use, I'll put it on CRAN.
