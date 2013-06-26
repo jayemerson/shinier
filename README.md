@@ -50,17 +50,17 @@ examine the R code provided in the demo (`shinier/demo/EPI_2012.R`).
 
 ---
 
-library(shinier)
-shinySkeleton("toyapplication")
-headerPanelAdd("My Toy Application")
-sliderInputAdd("n", "Choose the sample size:", 100, 500, 100)
-plotOutputAdd("myplot", plotcode =
-  '
-       hist(rnorm(input$n), main="Histogram from rnorm()")
-       abline(v=0, lwd=3, col="red")
-  ')
-createApp("toyapplication")
-runApp("toyapplication")
+> library(shinier)
+> shinySkeleton("toyapplication")
+> headerPanelAdd("My Toy Application")
+> sliderInputAdd("n", "Choose the sample size:", 100, 500, 100)
+> plotOutputAdd("myplot", plotcode =
+>   '
+>        hist(rnorm(input$n), main="Histogram from rnorm()")
+>        abline(v=0, lwd=3, col="red")
+>   ')
+> createApp("toyapplication")
+> runApp("toyapplication")
 
 ---
 
