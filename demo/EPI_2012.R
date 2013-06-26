@@ -30,9 +30,8 @@ selectInputAdd("country", "Select Primary Country:",
 selectInputAdd("var1", "Select Primary Variable:", names(x)[10:ncol(x)])
 selectInputAdd("var2", "Select Secondary Variable (optional):",
                c("none", names(x)[10:ncol(x)]))
-sliderInputAdd("yearmin", "Select starting year:", 2000, 2010, 2000,
+sliderInputAdd("yearrange", "Select year range:", 2000, 2010, c(2000, 2010),
                step=1, format="####")
-numericInputAdd("yearmax", "Enter ending year:", 2010, 2000, 2010, step=1)
 checkboxGroupArrayInputAdd("countries", "Select Comparator Countries:",
                            sort(unique(x$ISO)), ncol=5)
 
@@ -51,37 +50,37 @@ injectData(x, "x")
 # and then you will add this to the application, below.
 
 myplot <- '
-  maxyear <- input$yearmax
-  minyear <- min(maxyear, input$yearmin)
-  y <- x[x$ISO==input$country, c("Year", input$var1)]
-  y <- y[y$Year >= minyear & y$Year <= maxyear,]
-  ylab <- input$var1
-  if (input$var2!="none") ylab <- paste(ylab, ", ", input$var2, sep="")
-  maincountry <- x$Country[which(x$ISO==input$country)[1]]
-  plot(y[,1], y[,2], xlab="Year", ylab=ylab,
-       xlim=c(minyear-1,maxyear+1), ylim=c(0,100),
-       main=paste(maincountry, " (shown in bold)", sep=""), type="l", lwd=5)
-  text(minyear-0.5, y[1,2], input$country)
-  if (input$var2!="none") {
-    y <- x[x$ISO==input$country, c("Year", input$var2)]
+    maxyear <- input$yearrange[2]
+    minyear <- input$yearrange[1]
+    y <- x[x$ISO==input$country, c("Year", input$var1)]
     y <- y[y$Year >= minyear & y$Year <= maxyear,]
-    lines(y[,1], y[,2], col="green", lwd=5)
-    text(minyear-0.5, y[1,2], input$country, col="green")
-  }
-  if (length(input$countries)>0) {
-    for (thisc in input$countries) {
-      y <- x[x$ISO==thisc,c("Year", input$var1)]
+    ylab <- input$var1
+    if (input$var2!="none") ylab <- paste(ylab, ", ", input$var2, sep="")
+    maincountry <- x$Country[which(x$ISO==input$country)[1]]
+    plot(y[,1], y[,2], xlab="Year", ylab=ylab,
+         xlim=c(minyear-1,maxyear+1), ylim=c(0,100),
+         main=paste(maincountry, " (shown in bold)", sep=""), type="l", lwd=5)
+    text(minyear-0.5, y[1,2], input$country)
+    if (input$var2!="none") {
+      y <- x[x$ISO==input$country, c("Year", input$var2)]
       y <- y[y$Year >= minyear & y$Year <= maxyear,]
-      lines(y[,1], y[,2])
-      text(maxyear+0.5, y[nrow(y),2], thisc)
-      if (input$var2!="none") {
-        y <- x[x$ISO==thisc,c("Year", input$var2)]
+      lines(y[,1], y[,2], col="green", lwd=5)
+      text(minyear-0.5, y[1,2], input$country, col="green")
+    }
+    if (length(input$countries)>0) {
+      for (thisc in input$countries) {
+        y <- x[x$ISO==thisc,c("Year", input$var1)]
         y <- y[y$Year >= minyear & y$Year <= maxyear,]
-        lines(y[,1], y[,2], col="green")
-        text(maxyear+0.5, y[nrow(y),2], thisc, col="green")
+        lines(y[,1], y[,2])
+        text(maxyear+0.5, y[nrow(y),2], thisc)
+        if (input$var2!="none") {
+          y <- x[x$ISO==thisc,c("Year", input$var2)]
+          y <- y[y$Year >= minyear & y$Year <= maxyear,]
+          lines(y[,1], y[,2], col="green")
+          text(maxyear+0.5, y[nrow(y),2], thisc, col="green")
+        }
       }
     }
-  }
 '
 
 ##################################################################
