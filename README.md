@@ -39,6 +39,11 @@ Try this in R:
 
 ---
 
+When you're done, have a look at the files in the EPI_2012 folder that
+was created.  This sample application uses the basics of Shiny.  The
+same application could be created in different ways by directly authoring
+ui.R and server.R.  The use of more advanced Shiny features would
+require this.
 
 ## License
 
