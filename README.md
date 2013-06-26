@@ -1,15 +1,17 @@
 shinier
 =======
 
-A package extending package shiny and assisting in the creation of Shiny
-interactive web applications
+A package extending package shiny (in very minor ways) and
+assisting in the creation of Shiny interactive web applications
 
 ## Features
 
 If you don't know anything about [Shiny](http://www.rstudio.com/shiny/),
-you should visit the [R Studio](http://www.rstudio.com) folks.  Package
-shinier includes functions that may ultimately be included in package shiny.
-Other functions don't belong in package shiny and will be maintained here
+you should visit the [R Studio](http://www.rstudio.com) folks.  They
+have a nice [Shiny Tutorial](http://rstudio.github.io/shiny/tutorial/), too.
+Package shinier includes functions (well, one function at this point)
+that may ultimately be included in package shiny.
+Other functions don't belong in package shiny and might be maintained here
 for the purpose of extending Shiny functionality.
 
 ## Installation
@@ -23,6 +25,15 @@ some functionality that someone might actually use, I'll put it on CRAN.
 
 The package includes a sample data set, from the 2012 iteration of the
 Yale/Columbia [Environmental Performance Index](http://epi.yale.edu).
+Try this:
+
+---
+
+> library(shinier)
+> runApp("EPI_2012")
+
+---
+
 
 ## License
 
