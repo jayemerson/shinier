@@ -5,7 +5,8 @@ headerPanelAdd <- function(title, windowTitle = NULL)
   }
   ui <- .GlobalEnv$.shinier$ui
 
-  if (!is.null(windowTitle)) title <- paste(deparse(title), ", ",
+  title <- deparse(title)
+  if (!is.null(windowTitle)) title <- paste(title, ", ",
                                             deparse(windowTitle), sep="")
   ui <- gsub("\"Application Title\"", title, ui)
 
