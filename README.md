@@ -32,6 +32,7 @@ Try this:
 ---
 
 > library(shinier)
+
 > runApp("EPI_2012")
 
 ---
