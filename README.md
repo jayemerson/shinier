@@ -27,11 +27,13 @@ some functionality that someone might actually use, I'll put it on CRAN.
 
 The package includes a sample data set, from the 2012 iteration of the
 Yale/Columbia [Environmental Performance Index](http://epi.yale.edu).
-Try this:
+Try this in R:
 
 ---
 
 > library(shinier)
+
+> demo("EPI_2012")
 
 > runApp("EPI_2012")
 
