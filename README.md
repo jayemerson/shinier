@@ -1,4 +1,4 @@
-shinier
+shinier (should be shinyHelper and will be changed soon)
 =======
 
 A package extending package shiny (in very minor ways) and
