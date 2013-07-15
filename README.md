@@ -26,7 +26,7 @@ some functionality that someone might actually use, I'll put it on CRAN.
 ## Getting Started
 
 The package includes a sample data set, from the 2012 iteration of the
-Yale/Columbia [Environmental Performance Index](http://epi.yale.edu).
+Yale/Columbia [Environmental Performance Index](http://epi.yale.edu/).
 Try this in R:
 
 ---
