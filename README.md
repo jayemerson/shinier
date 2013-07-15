@@ -58,7 +58,7 @@ examine the R code provided in the demo (`shinier/demo/EPI_2012.R`).
 >        abline(v=0, lwd=3, col="red")  
 >   ')  
 > createApp("toyapplication")  
-> runApp("toyapplication")        # Interactive, not over the web
+> runApp("toyapplication")      # Interactive, not over the web
 
 ---
 
